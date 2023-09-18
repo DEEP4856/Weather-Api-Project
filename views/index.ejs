@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+</head>
+<body>
+   
+    
+    <form action="/" method="post">
+     <div class=" box wrapper">
+        <div class="  shape shape-1"></div>
+        <div class="  shape shape-2"></div>
+        <div class="container">
+          <div class="search-container">
+            <input
+            id="cityInput" type="text" name="cityname" placeholder="Search for a city"
+            />
+            <button id="search-btn" type="submit">Search</button>
+          </div>
+
+        <div class="content">
+          <div id="weathercon">
+            <img src="<%=senddata.imgurl %>">
+          </div>
+          <div class="info">
+              <h1 class="location"><i class="fa-solid fa-street-view"></i><%=senddata.cityname %>,<%= senddata.country %></i></h1>
+              <p id="date">SUN | MAR 26 |10:49PM</p>
+              <h1 class="temp"><%= senddata.temp %>℃</h1>
+          </div>
+        </div>
+          <!-- <div id="result"></div> -->
+        </div>
+      </div>
+  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://kit.fontawesome.com/9ad1db3f87.js" crossorigin="anonymous"></script>
+   <script>
+
+
+
+    const curdate= document.getElementById('date')
+    let weathercon = document.getElementById("weathercon");
+    const tempstatus = "clouds";
+
+
+
+    const currentday = ()=>{
+      const weekday = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
+
+
+
+      let currentdate = new Date();
+      let day =weekday[currentdate.getDay()];
+      return day;
+    };
+
+
+
+
+
+   const currenttime = ()=>{
+    const aLLmonths = ["JAN","FEB","MAR","APR","MAY","JUNE","JULY","AUG","SEP","OCT","NOV","DEC"];
+  
+    var dateObj = new Date();
+var month = aLLmonths [dateObj.getUTCMonth() ]; //months from 1-12
+var date = dateObj.getUTCDate();
+
+let hours = dateObj.getHours();
+let min = dateObj.getMinutes();
+
+let periods ="AM";
+if(hours>11){
+  periods="PM";
+  // -=12 if hours is greater than 12 than it will count from 1-10 not more than 12
+  if (hours>12)hours-=12; 
+    }
+if (min<10) {
+  min= "0"+min;
+  
+}
+// using template literlas
+return `${month} ${date} `+ ` || ` +`${hours} : ${min}${periods}`
+
+   }  
+
+   curdate.innerHTML = currentday() + " " +"||" + currenttime();
+
+ 
+   </script>
+  </body>
+</html>
